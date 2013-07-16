@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: design-patterns, | Bob Lauer]]></title>
-  <link href="http://boblauer.github.io/blog/categories/design-patterns/atom.xml" rel="self"/>
-  <link href="http://boblauer.github.io/"/>
-  <updated>2013-07-16T16:24:32-05:00</updated>
-  <id>http://boblauer.github.io/</id>
+  <link href="http://www.boblauer.com/blog/categories/design-patterns/atom.xml" rel="self"/>
+  <link href="http://www.boblauer.com/"/>
+  <updated>2013-07-16T16:44:42-05:00</updated>
+  <id>http://www.boblauer.com/</id>
   <author>
     <name><![CDATA[Bob Lauer]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Updating Wikipedia's Decorator Pattern JavaScript Example]]></title>
-    <link href="http://boblauer.github.io/blog/2013/07/15/updating-wikipedias-decorator-pattern-javascript-example/"/>
+    <link href="http://www.boblauer.com/blog/2013/07/15/updating-wikipedias-decorator-pattern-javascript-example/"/>
     <updated>2013-07-15T22:16:00-05:00</updated>
-    <id>http://boblauer.github.io/blog/2013/07/15/updating-wikipedias-decorator-pattern-javascript-example</id>
+    <id>http://www.boblauer.com/blog/2013/07/15/updating-wikipedias-decorator-pattern-javascript-example</id>
     <content type="html"><![CDATA[<p>I have recently been working through <a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">Addy Osmani's open-source book 'Learning JavaScript Design Patterns'</a>.  This led me to look up the Decorater Pattern, which then led me to an example of the Decorator Patterns on Wikipedia that was written in JavaScript (the example has since been removed from the Wikipedia page).  After looking at the code for a bit, I noticed that it had at least two flaws in it.  The code that was there at the time was:</p>
 
 
