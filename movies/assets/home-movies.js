@@ -112,6 +112,89 @@ var define, requireModule, require, requirejs;
 
     __exports__["default"] = App;
   });
+;define("home-movies/controllers/application", 
+  ["exports"],
+  function(__exports__) {
+    "use strict";
+    var ApplicationController = Ember.Controller.extend({
+      actions: {
+        showMenu: function() {
+          Ember.$('nav').css('left', '0');
+          Ember.$('.movie-container').width('80%');
+          Ember.$('.menu-helper').addClass('hidden');
+        },
+        checkIfDragging: function(e) {
+
+        }
+      }
+    });
+
+    __exports__["default"] = ApplicationController;
+  });
+;define("home-movies/controllers/movies", 
+  ["home-movies/mixins/groupable","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Groupable = __dependency1__["default"];
+
+    var MoviesController = Ember.ArrayController.extend(Groupable, {
+      ungroupedContentBinding: 'content',
+      group: function(movie) {
+        return Ember.Object.create({
+          key: movie.get('data').year
+        });
+      },
+      actions: {
+        hideMenu: function() {
+          $('body, .slide-container').prop('scrollLeft', 50000);
+        }
+      }
+    });
+
+    __exports__["default"] = MoviesController;
+  });
+;define("home-movies/mixins/groupable", 
+  ["exports"],
+  function(__exports__) {
+    "use strict";
+    var Groupable = Ember.Mixin.create({
+      group: null,
+      ungroupedContent: null,
+
+      groupedContent: function() {
+        var model = this;
+        var groupedContent = Ember.A([]);
+
+        var groupCallback = this.get('group');
+        var ungroupedContent = this.get('ungroupedContent');
+
+        if (!groupCallback) return groupedContent;
+        if (!ungroupedContent) return groupedContent;
+
+        ungroupedContent.forEach(function(item) {
+          var group = groupCallback.call(model, item);
+          var groupKey = group.get('key');
+
+          if (!groupKey) return;
+
+          var foundGroup = groupedContent.findProperty('group.key', groupKey);
+
+          if (!foundGroup) {
+            foundGroup = groupedContent.pushObject(Ember.ArrayProxy.create({
+              group: group,
+              content: Ember.A([])
+            }));
+          }
+
+          foundGroup.get('content').pushObject(item);
+        });
+
+        return groupedContent;
+      }.property('group', 'ungroupedContent.@each')
+    });
+
+    __exports__["default"] = Groupable;
+  });
 ;define("home-movies/models/movie", 
   ["exports"],
   function(__exports__) {
@@ -125,16 +208,137 @@ var define, requireModule, require, requirejs;
     MovieModel.reopenClass({
       FIXTURES: [
         { id: 1,
-          title: '1984 Bobby Born',
-          srcUrl: 'http://www.youtube.com',
-          previewUrl: 'http://www.youtube.com/preview.png'
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
         },
         {
           id: 2,
-          title: '1985 Bobby 1 year old',
-          srcUrl: 'http://www.gmail.com',
-          previewUrl: 'http://www.aol.com'
-        }
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 3,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 4,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 5,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 6,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 7,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 8,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 9,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 10,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 11,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 12,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 13,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 14,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 15,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 16,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 17,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 18,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 19,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 20,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 21,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 22,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
+        { id: 23,
+          title: 'Paul doing magic',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/4-A8WEC3kGo'
+        },
+        {
+          id: 24,
+          title: 'Dad, Joey, and Bobby wrestling',
+          year: 1986,
+          srcUrl: '//www.youtube.com/embed/my_JjbCHbgI'
+        },
       ]
     });
 
@@ -185,7 +389,6 @@ var define, requireModule, require, requirejs;
       var buffer = '', stack1;
 
 
-      data.buffer.push("<h2 id='title'>Welcome to Ember.js!!</h2>\n\n");
       stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
       if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
       data.buffer.push("\n");
@@ -201,16 +404,14 @@ var define, requireModule, require, requirejs;
     __exports__["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
     helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-      var buffer = '', stack1;
+      var buffer = '', escapeExpression=this.escapeExpression;
 
 
-      data.buffer.push("<div>");
-      stack1 = helpers._triageMustache.call(depth0, "title", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("</div>\n<div>");
-      stack1 = helpers._triageMustache.call(depth0, "srcUrl", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("</div>\n");
+      data.buffer.push("<iframe ");
+      data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+        'src': ("srcUrl")
+      },hashTypes:{'src': "STRING"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
+      data.buffer.push(" width=\"100%\" height=\"100%\" frameborder=\"0\" allowfullscreen></iframe>\n");
       return buffer;
       
     });
@@ -223,35 +424,51 @@ var define, requireModule, require, requirejs;
     __exports__["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
     helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-      var buffer = '', stack1, self=this, helperMissing=helpers.helperMissing;
+      var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
     function program1(depth0,data) {
       
-      var buffer = '', stack1, helper, options;
-      data.buffer.push("\n  ");
-      stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
-        'classNames': ("list-group-item")
-      },hashTypes:{'classNames': "STRING"},hashContexts:{'classNames': depth0},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "movie", "", options) : helperMissing.call(depth0, "link-to", "movie", "", options));
+      var buffer = '', stack1;
+      data.buffer.push("\n      <div class='group-title'>\n        ");
+      stack1 = helpers._triageMustache.call(depth0, "group.key", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
       if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("\n");
+      data.buffer.push("\n      </div>\n\n      <ul class='group-list'>\n        ");
+      stack1 = helpers.each.call(depth0, "content", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("\n      </ul>\n    ");
       return buffer;
       }
     function program2(depth0,data) {
       
+      var buffer = '', stack1, helper, options;
+      data.buffer.push("\n          <li class='group-item' ");
+      data.buffer.push(escapeExpression(helpers.action.call(depth0, "hideMenu", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+      data.buffer.push(">\n            ");
+      stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
+        'action': ("hideMenu"),
+        'tagName': ("span")
+      },hashTypes:{'action': "STRING",'tagName': "STRING"},hashContexts:{'action': depth0,'tagName': depth0},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "movie", "", options) : helperMissing.call(depth0, "link-to", "movie", "", options));
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("\n          </li>\n        ");
+      return buffer;
+      }
+    function program3(depth0,data) {
+      
       var buffer = '', stack1;
-      data.buffer.push("\n    ");
+      data.buffer.push("\n              ");
       stack1 = helpers._triageMustache.call(depth0, "title", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
       if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("\n  ");
+      data.buffer.push("\n            ");
       return buffer;
       }
 
-      stack1 = helpers.each.call(depth0, {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],data:data});
+      data.buffer.push("<div class='slide-container'>\n  <nav>\n    ");
+      stack1 = helpers.each.call(depth0, "groupedContent", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
       if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("\n\n");
+      data.buffer.push("\n  </nav>\n  <div class='movie-container'>\n    ");
       stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
       if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("\n");
+      data.buffer.push("\n  </div>\n</div>\n");
       return buffer;
       
     });
@@ -311,6 +528,33 @@ var define, requireModule, require, requirejs;
     module('JSHint - home-movies');
     test('home-movies/app.js should pass jshint', function() { 
       ok(true, 'home-movies/app.js should pass jshint.'); 
+    });
+  });
+;define("home-movies/tests/home-movies/controllers/application.jshint", 
+  [],
+  function() {
+    "use strict";
+    module('JSHint - home-movies/controllers');
+    test('home-movies/controllers/application.js should pass jshint', function() { 
+      ok(false, 'home-movies/controllers/application.js should pass jshint.\nhome-movies/controllers/application.js: line 8, col 32, \'e\' is defined but never used.\n\n1 error'); 
+    });
+  });
+;define("home-movies/tests/home-movies/controllers/movies.jshint", 
+  [],
+  function() {
+    "use strict";
+    module('JSHint - home-movies/controllers');
+    test('home-movies/controllers/movies.js should pass jshint', function() { 
+      ok(true, 'home-movies/controllers/movies.js should pass jshint.'); 
+    });
+  });
+;define("home-movies/tests/home-movies/mixins/groupable.jshint", 
+  [],
+  function() {
+    "use strict";
+    module('JSHint - home-movies/mixins');
+    test('home-movies/mixins/groupable.js should pass jshint', function() { 
+      ok(true, 'home-movies/mixins/groupable.js should pass jshint.'); 
     });
   });
 ;define("home-movies/tests/home-movies/models/movie.jshint", 
@@ -376,15 +620,6 @@ var define, requireModule, require, requirejs;
       ok(true, 'home-movies/tests/test-helper.js should pass jshint.'); 
     });
   });
-;define("home-movies/tests/home-movies/views/movies.jshint", 
-  [],
-  function() {
-    "use strict";
-    module('JSHint - home-movies/views');
-    test('home-movies/views/movies.js should pass jshint', function() { 
-      ok(true, 'home-movies/views/movies.js should pass jshint.'); 
-    });
-  });
 ;define("home-movies/tests/test-helper", 
   ["home-movies/tests/helpers/resolver","ember-qunit"],
   function(__dependency1__, __dependency2__) {
@@ -395,16 +630,6 @@ var define, requireModule, require, requirejs;
     setResolver(resolver);
 
     document.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
-  });
-;define("home-movies/views/movies", 
-  ["exports"],
-  function(__exports__) {
-    "use strict";
-    var MainView = Ember.View.extend({
-
-    });
-
-    __exports__["default"] = MainView;
   });
 ;/*!
  * jQuery JavaScript Library v1.11.1
@@ -70207,6 +70432,319 @@ define("ember-inflector/lib/system/string",
   });
 global.DS = requireModule('ember-data/lib/main')['default'];
 }(Ember.lookup));
+;/*
+ * Sidr
+ * https://github.com/artberri/sidr
+ *
+ * Copyright (c) 2013 Alberto Varela
+ * Licensed under the MIT license.
+ */
+
+;(function( $ ){
+
+  var sidrMoving = false,
+      sidrOpened = false;
+
+  // Private methods
+  var privateMethods = {
+    // Check for valids urls
+    // From : http://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-an-url
+    isUrl: function (str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+      if(!pattern.test(str)) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    // Loads the content into the menu bar
+    loadContent: function($menu, content) {
+      $menu.html(content);
+    },
+    // Add sidr prefixes
+    addPrefix: function($element) {
+      var elementId = $element.attr('id'),
+          elementClass = $element.attr('class');
+
+      if(typeof elementId === 'string' && '' !== elementId) {
+        $element.attr('id', elementId.replace(/([A-Za-z0-9_.\-]+)/g, 'sidr-id-$1'));
+      }
+      if(typeof elementClass === 'string' && '' !== elementClass && 'sidr-inner' !== elementClass) {
+        $element.attr('class', elementClass.replace(/([A-Za-z0-9_.\-]+)/g, 'sidr-class-$1'));
+      }
+      $element.removeAttr('style');
+    },
+    execute: function(action, name, callback) {
+      // Check arguments
+      if(typeof name === 'function') {
+        callback = name;
+        name = 'sidr';
+      }
+      else if(!name) {
+        name = 'sidr';
+      }
+
+      // Declaring
+      var $menu = $('#' + name),
+          $body = $($menu.data('body')),
+          $html = $('html'),
+          menuWidth = $menu.outerWidth(true),
+          speed = $menu.data('speed'),
+          side = $menu.data('side'),
+          displace = $menu.data('displace'),
+          onOpen = $menu.data('onOpen'),
+          onClose = $menu.data('onClose'),
+          bodyAnimation,
+          menuAnimation,
+          scrollTop,
+          bodyClass = (name === 'sidr' ? 'sidr-open' : 'sidr-open ' + name + '-open');
+
+      // Open Sidr
+      if('open' === action || ('toggle' === action && !$menu.is(':visible'))) {
+        // Check if we can open it
+        if( $menu.is(':visible') || sidrMoving ) {
+          return;
+        }
+
+        // If another menu opened close first
+        if(sidrOpened !== false) {
+          methods.close(sidrOpened, function() {
+            methods.open(name);
+          });
+
+          return;
+        }
+
+        // Lock sidr
+        sidrMoving = true;
+
+        // Left or right?
+        if(side === 'left') {
+          bodyAnimation = {left: menuWidth + 'px'};
+          menuAnimation = {left: '0px'};
+        }
+        else {
+          bodyAnimation = {right: menuWidth + 'px'};
+          menuAnimation = {right: '0px'};
+        }
+
+        // Prepare page if container is body
+        if($body.is('body')){
+          scrollTop = $html.scrollTop();
+          $html.css('overflow-x', 'hidden').scrollTop(scrollTop);
+        }
+
+        // Open menu
+        if(displace){
+          $body.addClass('sidr-animating').css({
+            width: $body.width(),
+            position: 'absolute'
+          }).animate(bodyAnimation, speed, function() {
+            $(this).addClass(bodyClass);
+          });
+        }
+        else {
+          setTimeout(function() {
+            $(this).addClass(bodyClass);
+          }, speed);
+        }
+        $menu.css('display', 'block').animate(menuAnimation, speed, function() {
+          sidrMoving = false;
+          sidrOpened = name;
+          // Callback
+          if(typeof callback === 'function') {
+            callback(name);
+          }
+          $body.removeClass('sidr-animating');
+        });
+
+        // onOpen callback
+        onOpen();
+      }
+      // Close Sidr
+      else {
+        // Check if we can close it
+        if( !$menu.is(':visible') || sidrMoving ) {
+          return;
+        }
+
+        // Lock sidr
+        sidrMoving = true;
+
+        // Right or left menu?
+        if(side === 'left') {
+          bodyAnimation = {left: 0};
+          menuAnimation = {left: '-' + menuWidth + 'px'};
+        }
+        else {
+          bodyAnimation = {right: 0};
+          menuAnimation = {right: '-' + menuWidth + 'px'};
+        }
+
+        // Close menu
+        if($body.is('body')){
+          scrollTop = $html.scrollTop();
+          $html.removeAttr('style').scrollTop(scrollTop);
+        }
+        $body.addClass('sidr-animating').animate(bodyAnimation, speed).removeClass(bodyClass);
+        $menu.animate(menuAnimation, speed, function() {
+          $menu.removeAttr('style').hide();
+          $body.removeAttr('style');
+          $('html').removeAttr('style');
+          sidrMoving = false;
+          sidrOpened = false;
+          // Callback
+          if(typeof callback === 'function') {
+            callback(name);
+          }
+          $body.removeClass('sidr-animating');
+        });
+
+        // onClose callback
+        onClose();
+      }
+    }
+  };
+
+  // Sidr public methods
+  var methods = {
+    open: function(name, callback) {
+      privateMethods.execute('open', name, callback);
+    },
+    close: function(name, callback) {
+      privateMethods.execute('close', name, callback);
+    },
+    toggle: function(name, callback) {
+      privateMethods.execute('toggle', name, callback);
+    },
+    // I made a typo, so I mantain this method to keep backward compatibilty with 1.1.1v and previous
+    toogle: function(name, callback) {
+      privateMethods.execute('toggle', name, callback);
+    }
+  };
+
+  $.sidr = function( method ) {
+
+    if ( methods[method] ) {
+      return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    }
+    else if ( typeof method === 'function' || typeof method === 'string' || ! method ) {
+      return methods.toggle.apply( this, arguments );
+    }
+    else {
+      $.error( 'Method ' + method + ' does not exist on jQuery.sidr' );
+    }
+
+  };
+
+  $.fn.sidr = function( options ) {
+
+    var settings = $.extend( {
+      name          : 'sidr',         // Name for the 'sidr'
+      speed         : 200,            // Accepts standard jQuery effects speeds (i.e. fast, normal or milliseconds)
+      side          : 'left',         // Accepts 'left' or 'right'
+      source        : null,           // Override the source of the content.
+      renaming      : true,           // The ids and classes will be prepended with a prefix when loading existent content
+      body          : 'body',         // Page container selector,
+      displace: true, // Displace the body content or not
+      onOpen        : function() {},  // Callback when sidr opened
+      onClose       : function() {}   // Callback when sidr closed
+    }, options);
+
+    var name = settings.name,
+        $sideMenu = $('#' + name);
+
+    // If the side menu do not exist create it
+    if( $sideMenu.length === 0 ) {
+      $sideMenu = $('<div />')
+        .attr('id', name)
+        .appendTo($('body'));
+    }
+
+    // Adding styles and options
+    $sideMenu
+      .addClass('sidr')
+      .addClass(settings.side)
+      .data({
+        speed          : settings.speed,
+        side           : settings.side,
+        body           : settings.body,
+        displace      : settings.displace,
+        onOpen         : settings.onOpen,
+        onClose        : settings.onClose
+      });
+
+    // The menu content
+    if(typeof settings.source === 'function') {
+      var newContent = settings.source(name);
+      privateMethods.loadContent($sideMenu, newContent);
+    }
+    else if(typeof settings.source === 'string' && privateMethods.isUrl(settings.source)) {
+      $.get(settings.source, function(data) {
+        privateMethods.loadContent($sideMenu, data);
+      });
+    }
+    else if(typeof settings.source === 'string') {
+      var htmlContent = '',
+          selectors = settings.source.split(',');
+
+      $.each(selectors, function(index, element) {
+        htmlContent += '<div class="sidr-inner">' + $(element).html() + '</div>';
+      });
+
+      // Renaming ids and classes
+      if(settings.renaming) {
+        var $htmlContent = $('<div />').html(htmlContent);
+        $htmlContent.find('*').each(function(index, element) {
+          var $element = $(element);
+          privateMethods.addPrefix($element);
+        });
+        htmlContent = $htmlContent.html();
+      }
+      privateMethods.loadContent($sideMenu, htmlContent);
+    }
+    else if(settings.source !== null) {
+      $.error('Invalid Sidr Source');
+    }
+
+    return this.each(function(){
+      var $this = $(this),
+          data = $this.data('sidr');
+
+      // If the plugin hasn't been initialized yet
+      if ( ! data ) {
+
+        $this.data('sidr', name);
+        if('ontouchstart' in document.documentElement) {
+          $this.bind('touchstart', function(e) {
+            var theEvent = e.originalEvent.touches[0];
+            this.touched = e.timeStamp;
+          });
+          $this.bind('touchend', function(e) {
+            var delta = Math.abs(e.timeStamp - this.touched);
+            if(delta < 200) {
+              e.preventDefault();
+              methods.toggle(name);
+            }
+          });
+        }
+        else {
+          $this.click(function(e) {
+            e.preventDefault();
+            methods.toggle(name);
+          });
+        }
+      }
+    });
+  };
+
+})( jQuery );
+
 ;define("ic-ajax",
   ["ember","exports"],
   function(__dependency1__, __exports__) {
