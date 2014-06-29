@@ -572,15 +572,6 @@ var define, requireModule, require, requirejs;
       ok(true, 'home-movies/tests/test-helper.js should pass jshint.'); 
     });
   });
-;define("home-movies/tests/home-movies/views/movies.jshint", 
-  [],
-  function() {
-    "use strict";
-    module('JSHint - home-movies/views');
-    test('home-movies/views/movies.js should pass jshint', function() { 
-      ok(true, 'home-movies/views/movies.js should pass jshint.'); 
-    });
-  });
 ;define("home-movies/tests/test-helper", 
   ["home-movies/tests/helpers/resolver","ember-qunit"],
   function(__dependency1__, __dependency2__) {
@@ -591,18 +582,6 @@ var define, requireModule, require, requirejs;
     setResolver(resolver);
 
     document.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
-  });
-;define("home-movies/views/movies", 
-  ["exports"],
-  function(__exports__) {
-    "use strict";
-    var MoviesView = Ember.View.extend({
-      didInsertElement: function() {
-        $('nav').stickySectionHeaders();
-      }
-    });
-
-    __exports__["default"] = MoviesView;
   });
 ;/*!
  * jQuery JavaScript Library v1.11.1
@@ -70405,70 +70384,6 @@ define("ember-inflector/lib/system/string",
   });
 global.DS = requireModule('ember-data/lib/main')['default'];
 }(Ember.lookup));
-;/*!
- * Sticky Section Headers
- *
- * Copyright (c) 2011 Florian Plank (http://www.polarblau.com/)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
- *
- * USAGE:
- *
- * $('#container').stickySectionHeaders({
- *   stickyClass      : 'sticky',
- *   headlineSelector : 'strong'
- * });
- *
- */
-
-(function($){
-  $.fn.stickySectionHeaders = function(options) {
-
-    var settings = $.extend({
-      stickyClass     : 'sticky',
-      headlineSelector: 'strong'
-    }, options);
-
-    return $(this).each(function() {
-      var $this = $(this);
-      $(this).find('ul:first').bind('scroll.sticky', function(e) {
-        $(this).find('> li').each(function() {
-          var $this      = $(this),
-              top        = $this.position().top,
-              height     = $this.outerHeight(true),
-              $head      = $this.find(settings.headlineSelector),
-              headHeight = $head.outerHeight(true);
-
-          if (top < 0) {
-            $this.addClass(settings.stickyClass).css('paddingTop', headHeight);
-            $head.css({
-              'top'  : (height + top < headHeight) ? (headHeight - (top + height)) * -1 : '',
-              'width': $this.outerWidth()
-            });
-          } else {
-            $this.removeClass(settings.stickyClass).css('paddingTop', '');
-          }
-        });
-      });
-    });
-  };
-
-  /* A little helper to calculate the sum of different
-   * CSS properties
-   *
-   * EXAMPLE:
-   * $('#my-div').cssSum('paddingLeft', 'paddingRight');
-   */
-  $.fn.cssSum = function() {
-    var $self = $(this), sum = 0;
-    $(arguments).each(function(i, e) {
-      sum += parseInt($self.css(e) || 0, 10);
-    });
-    return sum;
-  };
-
-})(jQuery);
-
 ;define("ic-ajax",
   ["ember","exports"],
   function(__dependency1__, __exports__) {

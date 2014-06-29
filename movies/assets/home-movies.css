@@ -61,15 +61,6 @@ nav > ul {
   box-shadow: 0 2px 3px 0 #ccc;
 }
 
-.sticky .group-title {
-  position: absolute;
-  top: 0;
-}
-
-.sticky .group-list {
-  margin-top: -19px;
-}
-
 .group-item {
   color: #565656;
   display: table;
