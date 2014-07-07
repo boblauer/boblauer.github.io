@@ -122,9 +122,6 @@ var define, requireModule, require, requirejs;
           Ember.$('nav').css('left', '0');
           Ember.$('.movie-container').width('80%');
           Ember.$('.menu-helper').addClass('hidden');
-        },
-        checkIfDragging: function(e) {
-
         }
       }
     });
@@ -389,9 +386,8 @@ var define, requireModule, require, requirejs;
       data.buffer.push(escapeExpression(helpers.action.call(depth0, "hideMenu", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
       data.buffer.push(">\n                ");
       stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
-        'action': ("hideMenu"),
         'tagName': ("span")
-      },hashTypes:{'action': "STRING",'tagName': "STRING"},hashContexts:{'action': depth0,'tagName': depth0},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "movie", "", options) : helperMissing.call(depth0, "link-to", "movie", "", options));
+      },hashTypes:{'tagName': "STRING"},hashContexts:{'tagName': depth0},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "movie", "", options) : helperMissing.call(depth0, "link-to", "movie", "", options));
       if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
       data.buffer.push("\n              </li>\n            ");
       return buffer;
@@ -479,7 +475,7 @@ var define, requireModule, require, requirejs;
     "use strict";
     module('JSHint - home-movies/controllers');
     test('home-movies/controllers/application.js should pass jshint', function() { 
-      ok(false, 'home-movies/controllers/application.js should pass jshint.\nhome-movies/controllers/application.js: line 8, col 32, \'e\' is defined but never used.\n\n1 error'); 
+      ok(true, 'home-movies/controllers/application.js should pass jshint.'); 
     });
   });
 ;define("home-movies/tests/home-movies/controllers/movie.jshint", 
@@ -572,6 +568,15 @@ var define, requireModule, require, requirejs;
       ok(true, 'home-movies/tests/test-helper.js should pass jshint.'); 
     });
   });
+;define("home-movies/tests/home-movies/views/movies.jshint", 
+  [],
+  function() {
+    "use strict";
+    module('JSHint - home-movies/views');
+    test('home-movies/views/movies.js should pass jshint', function() { 
+      ok(true, 'home-movies/views/movies.js should pass jshint.'); 
+    });
+  });
 ;define("home-movies/tests/test-helper", 
   ["home-movies/tests/helpers/resolver","ember-qunit"],
   function(__dependency1__, __dependency2__) {
@@ -582,6 +587,18 @@ var define, requireModule, require, requirejs;
     setResolver(resolver);
 
     document.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
+  });
+;define("home-movies/views/movies", 
+  ["exports"],
+  function(__exports__) {
+    "use strict";
+    var MoviesView = Ember.View.extend({
+      didInsertElement: function() {
+        Ember.$('li span').on('click', function() { });
+      }
+    });
+
+    __exports__["default"] = MoviesView;
   });
 ;/*!
  * jQuery JavaScript Library v1.11.1
