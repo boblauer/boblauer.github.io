@@ -134,7 +134,7 @@ var define, requireModule, require, requirejs;
     "use strict";
     var MovieController = Ember.ObjectController.extend({
       url: function() {
-        return '//www.youtube.com/embed/' + this.get('id');
+        return '//www.youtube.com/embed/' + this.get('id') + '?rel=0';
       }.property('id')
     });
 
