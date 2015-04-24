@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://www.boblauer.com/sitemap.xml 
+Sitemap: http://boblauer.github.io/sitemap.xml 

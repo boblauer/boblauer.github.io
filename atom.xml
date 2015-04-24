@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Bob Lauer]]></title>
-  <link href="http://www.boblauer.com/atom.xml" rel="self"/>
-  <link href="http://www.boblauer.com/"/>
-  <updated>2015-04-24T09:17:42-04:00</updated>
-  <id>http://www.boblauer.com/</id>
+  <link href="http://boblauer.github.io/atom.xml" rel="self"/>
+  <link href="http://boblauer.github.io/"/>
+  <updated>2015-04-24T10:43:45-04:00</updated>
+  <id>http://boblauer.github.io/</id>
   <author>
     <name><![CDATA[Bob Lauer]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://www.boblauer.com/blog/2015/04/24/back-at-it/"/>
+    <link href="http://boblauer.github.io/blog/2015/04/24/back-at-it/"/>
     <updated>2015-04-24T08:58:00-04:00</updated>
-    <id>http://www.boblauer.com/blog/2015/04/24/back-at-it</id>
+    <id>http://boblauer.github.io/blog/2015/04/24/back-at-it</id>
     <content type="html"><![CDATA[<p>Hello World!</p>
 ]]></content>
   </entry>
