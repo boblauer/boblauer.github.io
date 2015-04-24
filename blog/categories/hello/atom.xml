@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Bob Lauer]]></title>
-  <link href="http://boblauer.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: hello | Bob Lauer]]></title>
+  <link href="http://boblauer.github.io/blog/categories/hello/atom.xml" rel="self"/>
   <link href="http://boblauer.github.io/"/>
   <updated>2015-04-24T10:45:10-04:00</updated>
   <id>http://boblauer.github.io/</id>
